@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.slick-prev,
+.slick-next {
+    display: none !important;
+}
+
+body {
+    background-color: rgb(18, 26, 44);
+    color: white
+}

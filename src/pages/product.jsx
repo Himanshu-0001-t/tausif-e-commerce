@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from "../context/AuthContext"
+import axiosInstance from '../utils/axios';
 
 
 const ProductDetail = () => {
@@ -36,7 +37,7 @@ const ProductDetail = () => {
 
 
     try {
-      let response = await axios.post(`https://e-comm-backend-pkj2.onrender.com/api/cart/`, cartData, { withCredentials: true })
+      let response = await axiosInstance.post(`/cart/`, cartData)
 
       if (response.data.status === "success" || response.data.success) {
         toast.success("item add in cart")

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axios.js';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from "react-hot-toast"
@@ -9,11 +9,14 @@ import { useAuth } from "../context/AuthContext"
 
 const CartPage = () => {
     const [cartItems, setCartItems] = useState([])
+    const [loading, setLoading] = useState(false)
+
     const { user } = useAuth()
 
     const getCartItem = async () => {
         try {
-            let resposne = await axios.get(`https://e-comm-backend-pkj2.onrender.com/api/cart/${user}`, { withCredentials: true })
+            setLoading(true)
+            let resposne = await axiosInstance.get(`/cart/${user}`)
 
             if (resposne.data.status === "success") {
                 setCartItems(resposne.data.data.cart.products)
@@ -21,7 +24,9 @@ const CartPage = () => {
                 toast.error(resposne.data.message)
             }
         } catch (error) {
-            console.log(error)
+            toast.error(error.resposne.data.error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -33,12 +38,13 @@ const CartPage = () => {
         }
 
         try {
-            let response = await axios.patch("https://e-comm-backend-pkj2.onrender.com/api/cart/update", data, { withCredentials: true })
+            let response = await axiosInstance.patch("/cart/update", data)
             if (response.data.status === "success") {
                 toast.success("item quantity updated")
             }
         } catch (error) {
-            console.log(error)
+            toast.error(error.response.data.error)
+
         }
     }
 
@@ -65,14 +71,15 @@ const CartPage = () => {
         }
 
         try {
-            let response = await axios.post("https://e-comm-backend-pkj2.onrender.com/api/cart/remove", data, { withCredentials: true })
+            let response = await axiosInstance.post("/cart/remove", data)
+            console.log(response)
             if (response.data.status === "success") {
                 toast.success(response.data.message)
                 getCartItem()
             }
 
         } catch (error) {
-            console.log(error)
+            toast.error(error.response.data.error)
         }
     }
 
@@ -83,6 +90,14 @@ const CartPage = () => {
     const calculateTotal = () => {
         return cartItems.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);
     };
+
+    if (loading) {
+        return (
+            <div className='h-screen flex items-center justify-center'>
+                <h1 className='text-2xl font-bold text-white'>Loading...</h1>
+            </div>
+        )
+    }
 
     {
         return cartItems.length > 0 ? <div className="max-w-4xl mx-auto min-h-screen p-6 sm:p-8">

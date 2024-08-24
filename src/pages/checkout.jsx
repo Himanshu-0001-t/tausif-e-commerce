@@ -1,8 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext"
+import axiosInstance from "../utils/axios.js"
+import { toast } from 'react-hot-toast';
+
 
 const CheckoutPage = () => {
     let navigate = useNavigate()
@@ -91,14 +93,15 @@ const CheckoutPage = () => {
 
         const CreateOrder = async () => {
             try {
-                let response = await axios.post("https://e-comm-backend-pkj2.onrender.com/api/order", userData, { withCredentials: true })
+                let response = await axiosInstance.post("/order", userData)
 
                 if (response.data.status === "success") {
                     navigate('/order-placed')
                 }
 
             } catch (error) {
-                console.log(error)
+                toast.error(error.response.data.error)
+
             }
         }
         CreateOrder()

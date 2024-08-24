@@ -1,10 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from "react-hot-toast"
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from '../context/AuthContext';
+import axiosInstance from '../utils/axios';
 
-const LoginForm = ({ isAuthenticated }) => {
+const LoginForm = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ const LoginForm = ({ isAuthenticated }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://e-comm-backend-pkj2.onrender.com/api/user/login", formData, { withCredentials: true })
+      const response = await axiosInstance.post("/user/login", formData)
       console.log(response)
       if (response.data.status === "success" || response.data.success) {
         const token = response.data.user_id;

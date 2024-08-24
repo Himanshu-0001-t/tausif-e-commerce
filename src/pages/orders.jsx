@@ -1,6 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from "../context/AuthContext"
+import axiosInstance from '../utils/axios';
+import { toast } from 'react-hot-toast';
 
 const UserOrders = () => {
     const [orders, setOrders] = useState([])
@@ -8,7 +9,7 @@ const UserOrders = () => {
 
     const getOrders = async () => {
         try {
-            let resposne = await axios.get(`https://e-comm-backend-pkj2.onrender.com/api/orders/${user}`, { withCredentials: true })
+            let resposne = await axiosInstance.get(`/orders/${user}`)
 
             if (resposne.data.status === "success") {
                 setOrders(resposne.data.data)
@@ -16,7 +17,7 @@ const UserOrders = () => {
                 setOrders([])
             }
         } catch (error) {
-            console.log(error)
+            toast.error(error.resposne.data.error)
         }
     }
 

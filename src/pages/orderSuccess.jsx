@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom"
 
 function OrderSuccess() {
     return (
@@ -22,12 +23,12 @@ function OrderSuccess() {
                 </div>
                 <h1 className="text-2xl font-bold text-gray-800 mb-2">Order Placed Successfully!</h1>
                 <p className="text-gray-600 mb-6">Thank you for your purchase. Your order number is <span className="font-semibold text-gray-800">#123456789</span>.</p>
-                <button
+                <Link to="/shop"
                     className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
-                    onClick={() => window.location.href = '/shop'}
+
                 >
                     Continue Shopping
-                </button>
+                </Link>
             </div>
         </div>
     );

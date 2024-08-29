@@ -65,7 +65,7 @@ const ProductDetail = () => {
   return (
     <div className="max-w-4xl lg:h-screen mx-auto p-6 flex items-center justify-center">
       <div className="flex flex-col md:flex-row md:space-x-6 items-center">
-        <div className="flex-1">
+        <div className="flex-1 max-w-md">
           <img
             src={product.image}
             alt={product.name}

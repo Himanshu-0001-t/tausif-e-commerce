@@ -17,19 +17,30 @@ const UserOrders = () => {
                 setOrders([])
             }
         } catch (error) {
+            setOrders([])
             toast.error(error.resposne.data.error)
         }
     }
 
     useEffect(() => {
+
         getOrders()
+
     }, [])
+
+    if (orders.length == 0) {
+        return (
+            <div className='flex items-center justify-center h-screen'>
+                <h1 className='text-3xl '>Order not fount</h1>
+            </div>
+        )
+    }
 
     return (
         <div className=" mx-auto p-6 sm:p-8 w-screen max-w-5xl h-screen mt-8">
             <h1 className="text-2xl sm:text-3xl font-bold mb-6">Your Orders</h1>
             <div className="bg-white shadow-md rounded-lg overflow-x-auto">
-                {orders.length > 0 ? <table className="min-w-full divide-y divide-gray-200">
+                <table className="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
@@ -48,7 +59,7 @@ const UserOrders = () => {
                             </tr>
                         ))}
                     </tbody>
-                </table> : <h1 className='text-lg text-center font-bold my-5'>No order found</h1>}
+                </table>
             </div>
         </div>
     );

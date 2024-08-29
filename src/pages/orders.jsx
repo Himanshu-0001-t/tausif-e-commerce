@@ -23,7 +23,6 @@ const UserOrders = () => {
     }
 
     useEffect(() => {
-
         getOrders()
 
     }, [])

@@ -13,7 +13,7 @@ const ProductList = () => {
     const getProducts = async () => {
         try {
             setLoding(true)
-            let response = await axios.get("https://e-comm-backend-pkj2.onrender.com/api/products")
+            let response = await axios.get("https://e-comm-backend-opal.vercel.app/api/products")
 
             if (response.data.status === "success") {
                 setProducts(response.data.data)
@@ -28,7 +28,7 @@ const ProductList = () => {
     const searchProduct = async () => {
         try {
             setLoding(true)
-            let response = await axios.get(`https://e-comm-backend-pkj2.onrender.com/api/products/q/?search=${search}`)
+            let response = await axios.get(`https://e-comm-backend-opal.vercel.app/api/products/q/?search=${search}`)
 
             if (response.data.status === "success") {
                 setProducts(response.data.data)

@@ -14,7 +14,7 @@ const ProductDetail = () => {
 
   let id = useParams("id")
   let getProduct = async () => {
-    let response = await axios.get(`https://e-comm-backend-pkj2.onrender.com/api/product/${id.id}`)
+    let response = await axios.get(`https://e-comm-backend-opal.vercel.app/api/product/${id.id}`)
     if (response.data.status === "success") {
       setProduct(response.data.data)
     }

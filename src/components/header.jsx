@@ -18,7 +18,7 @@ const Header = () => {
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center justify-between lg:justify-evenly w-full">
                         <div className="shrink-0 flex items-center">
-                            <h1 className='text-2xl'>TAUSIF</h1>
+                            <h1 className='text-2xl'>Taushif</h1>
                         </div>
                         <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                             <Link to="/" className=" border-transparent text-white hover:border-gray-300 hover:text-gray-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">

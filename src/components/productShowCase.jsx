@@ -11,7 +11,7 @@ const ProductSection = () => {
     const getProduct = async () => {
         try {
             setLoding(true)
-            let response = await axios.get("https://e-comm-backend-pkj2.onrender.com/api/products?limit=10")
+            let response = await axios.get("https://e-comm-backend-opal.vercel.app/api/products?limit=10")
 
             if (response.data.status === "success") {
                 setproducts(response.data.data)

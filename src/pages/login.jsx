@@ -24,8 +24,8 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axiosInstance.post("/user/login", formData)
-      console.log(response)
+      const response = await axiosInstance.post("/login", formData)
+
       if (response.data.status === "success" || response.data.success) {
         const token = response.data.user_id;
         login(token);

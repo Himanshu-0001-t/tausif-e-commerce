@@ -24,7 +24,9 @@ const CartPage = () => {
                 toast.error(resposne.data.message)
             }
         } catch (error) {
-            toast.error(error.resposne.data.error)
+            if (error.response.data) {
+                toast.error(error.resposne.data.error)
+            }
         } finally {
             setLoading(false)
         }

@@ -11,7 +11,7 @@ const ProductSection = () => {
     const getProduct = async () => {
         try {
             setLoding(true)
-            let response = await axios.get("https://gadgetstore-34q8n2kx.b4a.run/api/product/q?limit=10")
+            let response = await axios.get("https://gadgetstore-34q8n2kx.b4a.run/api/product?limit=10")
 
             if (response.data.status === "success") {
                 setproducts(response.data.data)
